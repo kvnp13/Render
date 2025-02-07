@@ -1,13 +1,11 @@
-const soap = require("soap");
 const http = require("http");
+const soap = require("soap");
 
-// Lista de productos
 const productos = [
   { id: 1, nombre: "Laptop", precio: 1200 },
   { id: 2, nombre: "Mouse", precio: 25 },
 ];
 
-// Definición del servicio SOAP
 const servicio = {
   ProductoService: {
     ProductoPort: {
@@ -65,12 +63,11 @@ const xml = `
 
 `;
 
-// Crear servidor HTTP
+const PORT = process.env.PORT || 10000; // Usamos el puerto de Render o un valor predeterminado
+
 const server = http.createServer((req, res) => {});
 
-// Configurar y iniciar el servidor SOAP
-const port = process.env.PORT || 10000;
 server.listen(PORT, "0.0.0.0", () => {
-    soap.listen(server, "/soap", servicio, xml);
-    console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
-  });
+  soap.listen(server, "/soap", servicio, xml);
+  console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
+});
