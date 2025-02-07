@@ -72,5 +72,5 @@ const server = http.createServer((req, res) => {});
 const port = process.env.PORT || 4000;
 server.listen(port, () => {
   soap.listen(server, "/soap", servicio, xml);
-  console.log(`Servicio SOAP disponible en http://0.0.0.0:${port}/soap?wsdl`);
+  console.log(`Servicio SOAP disponible en http://0.0.0.0:${port}/soap`);
 });
