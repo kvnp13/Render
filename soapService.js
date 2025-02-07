@@ -24,20 +24,25 @@ const xml = `
   xmlns="http://schemas.xmlsoap.org/wsdl/"
   xmlns:tns="http://example.com/producto"
   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   targetNamespace="http://example.com/producto">
+  
   <message name="obtenerProductoRequest">
     <part name="id" type="xsd:int"/>
   </message>
+  
   <message name="obtenerProductoResponse">
     <part name="nombre" type="xsd:string"/>
     <part name="precio" type="xsd:float"/>
   </message>
+  
   <portType name="ProductoPort">
     <operation name="obtenerProducto">
       <input message="tns:obtenerProductoRequest"/>
       <output message="tns:obtenerProductoResponse"/>
     </operation>
   </portType>
+  
   <binding name="ProductoBinding" type="tns:ProductoPort">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="obtenerProducto">
@@ -50,12 +55,14 @@ const xml = `
       </output>
     </operation>
   </binding>
+  
   <service name="ProductoService">
     <port name="ProductoPort" binding="tns:ProductoBinding">
       <soap:address location="http://0.0.0.0:${process.env.PORT || 4000}/soap"/>
     </port>
   </service>
 </definitions>
+
 `;
 
 // Crear servidor HTTP
