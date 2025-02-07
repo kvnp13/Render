@@ -1,11 +1,13 @@
 const soap = require("soap");
 const http = require("http");
 
+// Lista de productos
 const productos = [
   { id: 1, nombre: "Laptop", precio: 1200 },
   { id: 2, nombre: "Mouse", precio: 25 },
 ];
 
+// Definición del servicio SOAP
 const servicio = {
   ProductoService: {
     ProductoPort: {
@@ -16,6 +18,7 @@ const servicio = {
   },
 };
 
+// XML del WSDL
 const xml = `
 <definitions name="ProductoService"
   xmlns="http://schemas.xmlsoap.org/wsdl/"
@@ -49,14 +52,18 @@ const xml = `
   </binding>
   <service name="ProductoService">
     <port name="ProductoPort" binding="tns:ProductoBinding">
-      <soap:address location="http://localhost:4000/soap"/>
+      <soap:address location="http://0.0.0.0:${process.env.PORT || 4000}/soap"/>
     </port>
   </service>
 </definitions>
 `;
 
+// Crear servidor HTTP
 const server = http.createServer((req, res) => {});
-server.listen(4000, () => {
+
+// Configurar y iniciar el servidor SOAP
+const port = process.env.PORT || 4000;
+server.listen(port, () => {
   soap.listen(server, "/soap", servicio, xml);
-  console.log("Servicio SOAP disponible en http://localhost:4000/soap?wsdl");
+  console.log(`Servicio SOAP disponible en http://0.0.0.0:${port}/soap?wsdl`);
 });
