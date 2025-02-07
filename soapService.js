@@ -67,7 +67,8 @@ const PORT = process.env.PORT || 10000; // Usamos el puerto de Render o un valor
 
 const server = http.createServer((req, res) => {});
 
-server.listen(PORT, "0.0.0.0", () => {
-  soap.listen(server, "/soap", servicio, xml);
-  console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
-});
+server.listen(PORT, "localhost", () => {
+    soap.listen(server, "/soap", servicio, xml);
+    console.log(`Servicio SOAP disponible en http://localhost:${PORT}/soap`);
+  });
+  
