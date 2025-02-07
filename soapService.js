@@ -69,8 +69,8 @@ const xml = `
 const server = http.createServer((req, res) => {});
 
 // Configurar y iniciar el servidor SOAP
-const port = process.env.PORT || 4000;
-server.listen(port, () => {
-  soap.listen(server, "/soap", servicio, xml);
-  console.log(`Servicio SOAP disponible en http://0.0.0.0:${port}/soap`);
-});
+const port = process.env.PORT || 10000;
+server.listen(PORT, "0.0.0.0", () => {
+    soap.listen(server, "/soap", servicio, xml);
+    console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
+  });
