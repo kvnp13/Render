@@ -56,21 +56,22 @@ const xml = `
   
   <service name="ProductoService">
     <port name="ProductoPort" binding="tns:ProductoBinding">
-      <soap:address location="http://0.0.0.0:${process.env.PORT || 4000}/soap"/>
+      <soap:address location="http://0.0.0.0:${process.env.PORT}/soap"/>
     </port>
   </service>
 </definitions>
-
 `;
 
-const PORT = process.env.PORT; // Render asigna el puerto automáticamente
+const PORT = process.env.PORT || 4000; // Asegurar que PORT no esté vacío
 
+// Crear el servidor HTTP correctamente manejando solicitudes
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Servidor SOAP corriendo correctamente\n");
+});
 
-const server = http.createServer((req, res) => {});
-
+// Hacer que el servicio SOAP escuche correctamente
 server.listen(PORT, "0.0.0.0", () => {
-    soap.listen(server, "/soap", servicio, xml);
-    console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
-  });
-  
-  
+  soap.listen(server, "/soap", servicio, xml);
+  console.log(`Servicio SOAP disponible en http://0.0.0.0:${PORT}/soap`);
+});
