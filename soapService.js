@@ -56,7 +56,7 @@ const xml = `
   
   <service name="ProductoService">
     <port name="ProductoPort" binding="tns:ProductoBinding">
-      <soap:address location="https://tu-servicio.onrender.com/soap"/>
+      <soap:address location="https://render-1-z54t.onrender.com/soap"/>
     </port>
   </service>
 </definitions>
